@@ -23,14 +23,14 @@ function setup(){
   
   mESlider = createSlider();
   mESlider.position(40, 200);
-  mESlider.mousePressed(togglePlayButton);
-  mESlider.mouseReleased(togglePlayButton);
+  mESlider.mousePressed(tempt);
+  mESlider.mouseReleased(tempt);
   mESlider.class("sim-slider gray");
   
   mGSlider = createSlider();
   mGSlider.position(40, 270);
-  mGSlider.mousePressed(togglePlayButton);
-  mGSlider.mouseReleased(togglePlayButton);
+  mGSlider.mousePressed(tempt);
+  mGSlider.mouseReleased(tempt);
   mGSlider.class("sim-slider gray");
   
   wireButton = createButton('CUT THE WIRE');
@@ -188,7 +188,9 @@ gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
 
 // }
  
+function tempt(){
 
+}
 
 
 function drawElevator(){
