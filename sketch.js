@@ -14,7 +14,9 @@ var flrDis;
 var dir;
 var theta;
 var w;
-var img
+var img;
+var guyposx;
+//var nums = [img.width/5]
 
 
 function setup(){ 
@@ -30,11 +32,10 @@ function setup(){
   mESlider.mouseReleased(tempt);
   mESlider.class("sim-slider gray");
   
-  mGSlider = createSlider();
-  mGSlider.position(40, 270);
-  mGSlider.mousePressed(tempt);
-  mGSlider.mouseReleased(tempt);
-  mGSlider.class("sim-slider gray");
+  nGSlider = createSlider(1,5,1);
+  nGSlider.position(40, 270);
+
+  nGSlider.class("sim-slider gray");
   
   wireButton = createButton('CUT THE WIRE');
   wireButton.position(20,100);
@@ -92,6 +93,7 @@ function setup(){
   flrDis=4;
   ypos=540;
   t=2;
+  guyposx=320;
 }
 
 function draw() {
@@ -109,7 +111,9 @@ function draw() {
   
   textSize(20); 
   w = mESlider.value();
+  n= nGSlider.value() * 2;
   text(int(w)+" kg",175,149);
+   text(int(n),210,230);
   
   textSize(50);
   textStyle(BOLD);
@@ -127,11 +131,15 @@ function draw() {
   
   drawElevator();
   drawRope();
-    image(img, 320, 450, img.width/5, img.height/5);
-  
-  
+ 
+    for(var i=0; i<nGSlider.value();i++){
+
+  	  image(img, guyposx+(i*20), 450, img.width/5, img.height/5);
 
 
+   	   image(img, guyposx-(i*20), 450, img.width/5, img.height/5);
+
+  	}
   
 rectMode(CORNER);
 
@@ -217,6 +225,7 @@ gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
 function tempt(){
 
 }
+
 
 
 function drawElevator(){
