@@ -13,15 +13,18 @@ var cut = false;
 var flrDis;
 var dir;
 var theta;
+var w;
+var img
 
 
 function setup(){ 
   canvas = createCanvas(640, 800);
   canvas.parent('sketch-holder');
-  
   frameRate(30);
+  img=loadImage("assets/stick.png");
+  imageMode(CENTER);
   
-  mESlider = createSlider();
+  mESlider = createSlider(1,3000,1200);
   mESlider.position(40, 200);
   mESlider.mousePressed(tempt);
   mESlider.mouseReleased(tempt);
@@ -97,16 +100,23 @@ function draw() {
   fill("black");
   textSize(15);
   textStyle(NORMAL);
-  text("M-E",7,216);
-  text("M-G",7,146);
+  text("M-G",7,216);
+  text("M-E",7,146);
   text("Gravity = 9.81m/s^2",8,275);
   textSize(12);
-  text("Mass of Elevator",60,236);
-  text("Mass of Guy",70,166);
+  text("Mass of Guy",70,236);
+  text("Mass of Elevator",60,166);
+  
+  textSize(20); 
+  w = mESlider.value();
+  text(int(w)+" kg",175,149);
+  
   textSize(50);
   textStyle(BOLD);
   text(flrDis,400,200);
   print(flrDis);
+  
+ 
   
   
   // text(oldFloor,500,200);
@@ -117,6 +127,7 @@ function draw() {
   
   drawElevator();
   drawRope();
+    image(img, 320, 450, img.width/5, img.height/5);
   
   
 
@@ -131,19 +142,19 @@ vVector.target = p5.Vector.add(startPoint,createVector(0,dir));
   vVector.display();
   
   
-ypos=ypos-speed;
+ypos=ypos-speed; //speed of the elevator, how fast the platform moves
 
-  if(ypos<0){
+  if(ypos<0){ //resets the pos of the platform & signals the floor
   	ypos = height;
   		flrDis=flrDis-1;
   }
-    if(ypos>height){
+    if(ypos>height){	
   	ypos = 2;
   		flrDis=flrDis+1;
   }
 
 
-    if(flrDis<1){
+    if(flrDis<1){ //When it crashes
   fill('black');
   rectMode(CORNER);
   rect(0,500,width,500);
@@ -153,18 +164,20 @@ ypos=ypos-speed;
     return
     }
     
-    if ((oldFloor==flrDis)&&(ypos=540)){
+    if ((oldFloor==flrDis)&&(ypos=540)){ 
+   //stops the platform at the correct flr
   speed=0;
   dir=0;
     }
   
+    
   
   rectMode(CENTER); 
 	fill('black'); 
 	rect(540,ypos,215,50);
 
- if(cut==true){
-speed=speed+(g/70);
+ if(cut==true){  //puts the elevator into free fall
+speed=speed+(g/70); //accelerating the arrow
 dir=dir+g/10;
 rectMode(CORNER);
 dir2=98;
@@ -172,6 +185,19 @@ gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
 gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
   gVector.update();
   gVector.display();
+ }
+
+ if(mESlider.value()>2999){
+cut=true;
+speed=speed+(g/70); //accelerating the arrow
+dir=dir+g/10;
+rectMode(CORNER);
+dir2=98;
+gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
+gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
+  gVector.update();
+  gVector.display();
+ oldFloor=-100;
  }
 	
 }
@@ -197,6 +223,8 @@ function drawElevator(){
   rectMode(CENTER);
   fill(125,125,125,255);
   rect(width/2,height/2,200,250);
+  fill('#DAE0E3');
+  rect(width/2,height/2,180,230);
 }
 
 function drawRope(){
@@ -219,7 +247,7 @@ function togglePlayButton(){
   }
 
   if (!cut){
-     loop();
+     loop();//accelerates the elevator
     cut = true;
     speed=g;
     g=g*2;
