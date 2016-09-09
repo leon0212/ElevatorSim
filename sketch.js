@@ -106,14 +106,14 @@ function draw() {
   text("M-E",7,146);
   text("Gravity = 9.81m/s^2",8,275);
   textSize(12);
-  text("Number of people",70,236);
+  text("Number of people",65,236);
   text("Mass of Elevator",60,166);
   
   textSize(20); 
   w = mESlider.value();
   n= nGSlider.value() * 2;
   text(int(w)+" kg",175,149);
-   text(int(n),175,228);
+   text(int(n),180,225);
   
   textSize(50);
   textStyle(BOLD);
