@@ -14,12 +14,14 @@ var flrDis;
 var dir;
 var theta;
 var w;
+var img
+
 
 function setup(){ 
   canvas = createCanvas(640, 800);
   canvas.parent('sketch-holder');
-  
   frameRate(30);
+  img=loadImage("assets/stick.png");
   
   mESlider = createSlider(1,3000,1200);
   mESlider.position(40, 200);
@@ -124,6 +126,7 @@ function draw() {
   
   drawElevator();
   drawRope();
+    image(img, 0,0);
   
   
 
@@ -219,6 +222,8 @@ function drawElevator(){
   rectMode(CENTER);
   fill(125,125,125,255);
   rect(width/2,height/2,200,250);
+  fill('#DAE0E3');
+  rect(width/2,height/2,180,230);
 }
 
 function drawRope(){
