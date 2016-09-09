@@ -22,6 +22,7 @@ function setup(){
   canvas.parent('sketch-holder');
   frameRate(30);
   img=loadImage("assets/stick.png");
+  imageMode(CENTER);
   
   mESlider = createSlider(1,3000,1200);
   mESlider.position(40, 200);
@@ -126,7 +127,7 @@ function draw() {
   
   drawElevator();
   drawRope();
-    image(img, 0,0);
+    image(img, 320, 450, img.width/5, img.height/5);
   
   
 
