@@ -16,6 +16,7 @@ var theta;
 var w;
 var img;
 var guyposx;
+var acc;
 //var nums = [img.width/5]
 
 
@@ -94,6 +95,7 @@ function setup(){
   ypos=540;
   t=2;
   guyposx=320;
+  acc=0;
 }
 
 function draw() {
@@ -115,7 +117,8 @@ function draw() {
   text(int(w)+" kg",175,149);
   text(int(n),180,215);
   text(" ~"+(int(n)*62)+"kg",205,215);
-  text("Velocity :"+int(-speed)+"m/s",205,550);
+  text("Velocity :"+int(-speed)+"m/s",10,550);
+  text("Acceleration:"+(acc)+"m/s^2",10,570);
   
   textSize(50);
   textStyle(BOLD);
@@ -191,6 +194,7 @@ speed=speed+(g/70); //accelerating the arrow
 dir=dir+g/10;
 rectMode(CORNER);
 dir2=98;
+acc=-9.81;
 gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
 gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
   gVector.update();
