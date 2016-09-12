@@ -17,6 +17,7 @@ var w;
 var img;
 var guyposx;
 var acc;
+var eq;
 //var nums = [img.width/5]
 
 
@@ -96,12 +97,19 @@ function setup(){
   t=2;
   guyposx=320;
   acc=0;
+
 }
 
 function draw() {
   
  background('lightgray');
-  fill("black");
+ w = mESlider.value();
+ n= nGSlider.value() * 2;
+ eq=int((int(w)+(int(n)*62))*9.81);
+ if(cut==true){
+ eq=0;	
+ }
+ fill("black");
   textSize(15);
   textStyle(NORMAL);
   text("M-G",7,216);
@@ -110,19 +118,21 @@ function draw() {
   textSize(12);
   text("Number of people",65,236);
   text("Mass of Elevator",60,166);
+  textSize(18);
+  text("Rope Tension: "+ eq +" N",330,155);
   
   textSize(20); 
-  w = mESlider.value();
-  n= nGSlider.value() * 2;
   text(int(w)+" kg",175,149);
   text(int(n),180,215);
   text(" ~"+(int(n)*62)+"kg",205,215);
   text("Velocity :"+int(-speed)+"m/s",10,550);
   text("Acceleration:"+(acc)+"m/s^2",10,570);
+  text("Rope Tension: Mass x Gravity ",330,130);
   
-  textSize(50);
+  
+  textSize(80);
   textStyle(BOLD);
-  text(flrDis,400,200);
+  text(flrDis,510,370);
   print(flrDis);
   
  
