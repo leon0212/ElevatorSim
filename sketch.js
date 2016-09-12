@@ -112,11 +112,11 @@ function draw() {
  fill("black");
   textSize(15);
   textStyle(NORMAL);
-  text("M-G",7,216);
+  text("M-P",7,216);
   text("M-E",7,146);
   text("Gravity = 9.81m/s^2",8,275);
   textSize(12);
-  text("Number of people",65,236);
+  text("Number of people",60,236);
   text("Mass of Elevator",60,166);
   textSize(18);
   text("Rope Tension: "+ eq +" N",330,155);
