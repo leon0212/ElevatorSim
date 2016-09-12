@@ -113,7 +113,9 @@ function draw() {
   w = mESlider.value();
   n= nGSlider.value() * 2;
   text(int(w)+" kg",175,149);
-   text(int(n),180,225);
+  text(int(n),180,215);
+  text(" ~"+(int(n)*62)+"kg",205,215);
+  text("Velocity :"+int(-speed)+"m/s",205,550);
   
   textSize(50);
   textStyle(BOLD);
@@ -207,6 +209,19 @@ gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
   gVector.display();
  oldFloor=-100;
  }
+ 
+if((int(n)*62)+mESlider.value()>2999){
+cut=true;
+speed=speed+(g/70); //accelerating the arrow
+dir=dir+g/10;
+rectMode(CORNER);
+dir2=98;
+gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
+gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
+  gVector.update();
+  gVector.display();
+ oldFloor=-100;
+}
 	
 }
 
@@ -282,6 +297,7 @@ function movingEle1(){
 		oldFloor=1;
 		speed=4;
 		dir=100;
+		
 	}
 	if (newFloor < oldFloor){
 		oldFloor=1;
