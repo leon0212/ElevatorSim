@@ -1,8 +1,10 @@
-
+/*general*/
+html {overflow:hidden;}
 /*sliders*/
 
 input[type=range].sim-slider {
   -webkit-appearance: none;
+    margin: 18px 0;
 }
 
 input[type=range].sim-slider:focus {
@@ -90,6 +92,31 @@ input[type=range].sim-slider:focus::-ms-fill-lower {
 }
 input[type=range].sim-slider:focus::-ms-fill-upper {
   background: white;
+}
+
+
+input[type=range].sim-slider.red::-webkit-slider-thumb{
+	background: #C67775;
+}
+
+input[type=range].sim-slider.red::-moz-range-thumb{
+	background: #C67775;
+}
+
+input[type=range].sim-slider.red::-ms-thumb{
+	background: #C67775;
+}
+
+input[type=range].sim-slider.gray::-webkit-slider-thumb{
+	background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-moz-range-thumb{
+	background: #e6e6e6;
+}
+
+input[type=range].sim-slider.gray::-ms-thumb{
+	background: #e6e6e6;
 }
 
 @media screen and (min-width: 40.5em) {
@@ -212,12 +239,14 @@ input[type=range].sim-slider.gray::-ms-thumb{
 	background: #e6e6e6;
 }
 
-input[type=range].sim-slider.vertical{    
-transform: rotate(270deg);
+
+
 }
 
 
-
+input[type=range].sim-slider.vertical{
+transform: rotate(270deg);
+}
 /* SIM BUTTON */
 .sim-button {
   width:100px;
@@ -290,9 +319,7 @@ transform: rotate(270deg);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-.sim-button.elevator{
-	width:50px;
-	padding: 15px 10px;
+
 }
 
 /*Switches (which are really just checkboxes)*/
@@ -332,7 +359,8 @@ transform: rotate(270deg);
 	background: #94c6d8;
 	position: absolute; top: 0; bottom: 0;
 	right: 53px;
-	border:1px solid #a1a1a1; a; border-radius: 8px;
+	border:1px solid #a1a1a1;
+  border-radius: 8px;
 	transition: all 0.2s ease-in 0s;
 	box-shadow: 1px 1px 1px #000000, 0px 0px 1px #a1a1a1;
 }
@@ -376,7 +404,7 @@ transform: rotate(270deg);
 	box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
 	border-radius: 8px;
 	border: thin solid black;
-	
+
 }
 
 .sim-radio input[type=radio]:checked + label:before {
@@ -387,7 +415,7 @@ transform: rotate(270deg);
 	text-align:center;
 	line-height:16px;
 	text-shadow:0px 0px 3px #eee;
-	
+
 
 }
 
