@@ -1,16 +1,9 @@
-var F,g,mass;
-var playButton;
-var mESlider;
-var mGSlider;
+var g;
 var play = false;
-var level = [];
 var ypos;
-var onfloor=1;
-var oldFloor;
-var newFloor;
+var oldFloor,newFloor,flrDis;
 var speed;
 var cut = false;
-var flrDis;
 var dir;
 var theta;
 var w;
@@ -18,7 +11,6 @@ var img;
 var guyposx;
 var acc;
 var eq;
-//var nums = [img.width/5]
 
 
 function setup(){ 
@@ -30,8 +22,8 @@ function setup(){
   
   mESlider = createSlider(1,3000,1200);
   mESlider.position(40, 200);
-  mESlider.mousePressed(tempt);
-  mESlider.mouseReleased(tempt);
+  mESlider.mousePressed(filler);
+  mESlider.mouseReleased(filler);
   mESlider.class("sim-slider gray");
   
   nGSlider = createSlider(1,5,1);
@@ -64,7 +56,7 @@ function setup(){
   eleButton4.mouseClicked(movingEle4);
   eleButton4.class("sim-button gray elevator");
   
-  
+  //Blue velocity arrow (Velocity)
   startPoint = createVector(250, 275);
   vdisp = createVector(0,dir);
   
@@ -75,20 +67,24 @@ function setup(){
   vVector.grab = false;
   vVector.draggable = false;
   vVector.showComponents = false;
-  
+ ///////////////////////////////////////////////////////////////////////////// 
+ 
+ //Red gravity arrow (Acceleration)
   startPoint2 = createVector(325, 525);
   vdisp2 = createVector(0,0);
   
-  endPoint2= p5.Vector.add(startPoint2, vdisp2)
+  endPoint2= p5.Vector.add(startPoint2, vdisp2);
   
   gVector = new Arrow(startPoint2, endPoint2);
   gVector.color = color('red');
   gVector.grab = false;
   gVector.draggable = false;
   gVector.showComponents = false;
-
-  noStroke();
   
+///////////////////////////////////////////////////////////////////////////////
+ 
+  // setting the var values
+  noStroke();
   g = 9.8;
   speed=1;
   oldFloor=4;
@@ -97,7 +93,7 @@ function setup(){
   t=2;
   guyposx=320;
   acc=0;
-
+////////////////////////////////////////////////////////////
 }
 
 function draw() {
@@ -109,6 +105,8 @@ function draw() {
  if(cut==true){
  eq=0;	
  }
+ 
+ //All the text stuff
  fill("black");
   textSize(15);
   textStyle(NORMAL);
@@ -134,29 +132,23 @@ function draw() {
   textStyle(BOLD);
   text(flrDis,510,370);
   print(flrDis);
-  
- 
-  
-  
-  // text(oldFloor,500,200);
-  // print(oldFloor);
-  // text(ypos,500,300);
-  // print(ypos);
-
+////////////////////////////////////////////////////////////////////////////////
   
   drawElevator();
   drawRope();
  
+  //Adds more people into the elevator
+  
     for(var i=0; i<nGSlider.value();i++){
 
   	  image(img, guyposx+(i*20), 450, img.width/5, img.height/5);
 
-
    	   image(img, guyposx-(i*20), 450, img.width/5, img.height/5);
-
   	}
-  
-rectMode(CORNER);
+  	
+ /////////////////////////////////////////////////////////////////////////////// 
+
+ rectMode(CORNER);
 
 
 vVector.origin = p5.Vector.add(startPoint,createVector(0,0));
@@ -167,7 +159,8 @@ vVector.target = p5.Vector.add(startPoint,createVector(0,dir));
   
 ypos=ypos-speed; //speed of the elevator, how fast the platform moves
 
-  if(ypos<0){ //resets the pos of the platform & signals the floor
+//resets the pos of the platform & signals the floor
+  if(ypos<0){
   	ypos = height;
   		flrDis=flrDis-1;
   }
@@ -175,7 +168,7 @@ ypos=ypos-speed; //speed of the elevator, how fast the platform moves
   	ypos = 2;
   		flrDis=flrDis+1;
   }
-
+///////////////////////////////////////////////////////////////////////////////
 
     if(flrDis<1){ //When it crashes
   fill('black');
@@ -186,15 +179,15 @@ ypos=ypos-speed; //speed of the elevator, how fast the platform moves
     noLoop();
     return
     }
-    
-    if ((oldFloor==flrDis)&&(ypos=540)){ 
-   //stops the platform at the correct flr
+////////////////////////////////////////////////////////////////////////////////
+
+//stops the platform at the correct flr  
+if ((oldFloor==flrDis)&&(ypos=540)){ 
   speed=0;
   dir=0;
     }
-  
+////////////////////////////////////////////////////////////////////////////////  
     
-  
   rectMode(CENTER); 
 	fill('black'); 
 	rect(540,ypos,215,50);
@@ -210,48 +203,39 @@ gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
   gVector.update();
   gVector.display();
  }
+////////////////////////////////////////////////////////////////////////////////
 
- if(mESlider.value()>2999){
-cut=true;
-speed=speed+(g/70); //accelerating the arrow
-dir=dir+g/10;
-rectMode(CORNER);
-dir2=98;
-gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
-gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
-  gVector.update();
-  gVector.display();
- oldFloor=-100;
+// When the elevator gets too heavy
+ 	if(mESlider.value()>2999){
+ 	 cut=true;
+ 	 speed=speed+(g/70); //accelerating the arrow
+ 	 dir=dir+g/10;
+ 	 rectMode(CORNER);
+ 	 dir2=98;
+ 	 gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
+ 	 gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
+ 	 gVector.update();
+ 	 gVector.display();
+ 	 oldFloor=-100;
  }
  
-if((int(n)*62)+mESlider.value()>2999){
-cut=true;
-speed=speed+(g/70); //accelerating the arrow
-dir=dir+g/10;
-rectMode(CORNER);
-dir2=98;
-gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
-gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
-  gVector.update();
-  gVector.display();
- oldFloor=-100;
+ 	if((int(n)*62)+mESlider.value()>2999){
+ 		cut=true;
+ 		speed=speed+(g/70); //accelerating the arrow
+ 		dir=dir+g/10;
+ 		rectMode(CORNER);
+ 		dir2=98;
+ 		gVector.origin = p5.Vector.add(startPoint2,createVector(0,0));
+ 		gVector.target = p5.Vector.add(startPoint2,createVector(0,dir2));
+ 		gVector.update();
+ 		gVector.display();
+ 		oldFloor=-100;
 }
-	
+///////////////////////////////////////////////////////////////////////////////	
 }
 
-// function Level() {
-// this.x =width-100;
-// this.y =_y;
-// this.size =100;
-// this.speed=_speed;
-
-// this.move = function(){
-//   this.y +=sSlider.value();
-// }
-
-// }
  
-function tempt(){
+function filler(){
 
 }
 
@@ -283,18 +267,18 @@ function togglePlayButton(){
     wireButton.html("CUT THE WIRE");
     return
   }
-
+//accelerates the elevator
   if (!cut){
-     loop();//accelerates the elevator
+    loop();
     cut = true;
     speed=g;
-    g=g*2;
+    g=g+9.81;
     dir=100;
 drawRope();
 fill('lightgray');
     oldFloor=-100;
-
   }
+////////////////////////////////////////////////////////////////////////////////  
 }
 
 function movingEle1(){
