@@ -21,13 +21,13 @@ function setup(){
   imageMode(CENTER);
   
   mESlider = createSlider(1,3000,1200);
-  mESlider.position(40, 200);
+  mESlider.position(10, 220);
   mESlider.mousePressed(filler);
   mESlider.mouseReleased(filler);
   mESlider.class("sim-slider gray");
   
   nGSlider = createSlider(1,5,1);
-  nGSlider.position(40, 270);
+  nGSlider.position(10, 290);
 
   nGSlider.class("sim-slider gray");
   
@@ -110,19 +110,19 @@ function draw() {
  fill("black");
   textSize(15);
   textStyle(NORMAL);
-  text("M-P",7,216);
+  text("N-P",7,216);
   text("M-E",7,146);
   text("Gravity = 9.81m/s^2",8,275);
   textSize(12);
-  text("Number of people",60,236);
-  text("Mass of Elevator",60,166);
+  text("Number of people :",50,216);
+  text("Mass of Elevator :",50,146);
   textSize(18);
   text("Rope Tension: "+ eq +" N",330,155);
   
   textSize(20); 
   text(int(w)+" kg",175,149);
-  text(int(n),180,215);
-  text(" ~"+(int(n)*62)+"kg",205,215);
+  text(int(n),175,216);
+  text(" ~"+(int(n)*62)+"kg",195,216);
   text("Velocity :"+int(-speed)+"m/s",10,550);
   text("Acceleration:"+(acc)+"m/s^2",10,570);
   text("Rope Tension: Mass x Gravity ",330,130);
